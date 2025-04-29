@@ -1,1 +1,1 @@
-# PhotoM-dIA
+# PhotoMedIA
