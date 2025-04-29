@@ -31,7 +31,8 @@
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g8" />
+     inkscape:current-layer="svg10"
+     showguides="true" />
   <!-- Définition des filtres de glow -->
   <defs
      id="defs4">
@@ -158,22 +159,24 @@
   </g>
   <!-- Texte avec glow correspondant -->
   <g
-     id="g9"
-     transform="translate(-65.53125,-33)">
-    <text
-       x="60"
-       y="340"
-       class="text-blue"
-       id="text8">Photo</text>
-  </g>
-  <g
      id="g10"
-     transform="translate(-65.53125,-33)">
-    <text
-       x="240"
-       y="340"
-       class="text-green"
-       id="text9">MédIA</text>
+     transform="translate(-57.878555,-33)">
+    <g
+       id="g11">
+      <g
+         id="g9">
+        <text
+           x="60"
+           y="340"
+           class="text-blue"
+           id="text8">Photo</text>
+      </g>
+      <text
+         x="240"
+         y="340"
+         class="text-green"
+         id="text9">MédIA</text>
+    </g>
   </g>
   <g
      id="g6"
