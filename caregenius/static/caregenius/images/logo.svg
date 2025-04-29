@@ -129,7 +129,7 @@
        sodipodi:nodetypes="ccc" />
     <circle
        cx="406.06183"
-       cy="79.796158"
+       cy="85.796158"
        r="10"
        class="dot"
        id="circle6" />
@@ -140,7 +140,7 @@
        sodipodi:nodetypes="ccc" />
     <circle
        cx="406.06183"
-       cy="143.11702"
+       cy="145.11702"
        r="10"
        class="dot"
        id="circle7" />
@@ -153,7 +153,7 @@
        class="dot"
        id="circle8"
        r="10"
-       cy="268.7413"
+       cy="270.7413"
        cx="406.06183" />
   </g>
   <!-- Texte avec glow correspondant -->
