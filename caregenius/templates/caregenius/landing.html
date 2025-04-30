@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PhotoMédIA – Accueil</title>
+  <link rel="stylesheet" href="{% static 'caregenius/css/landing.css' %}">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+        <div id="logo-div">
+            <img src="{% static 'caregenius/images/logo_sans_texte.svg' %}" alt="logo" id="logo">
+            <a href="#" class="logo-text">Photo<span class="text-color-primary">MédIA</span></a>
+        </div>
+      <nav class="main-nav">
+        <a href="#">Analyse</a>
+        <a href="#">Fonctionnalités</a>
+        <a href="#">Sécurité</a>
+      </nav>
+      <div class="auth">
+        <a href="#" class="btn-login">Se connecter</a>
+        <a href="#" class="btn-signup">S'inscrire</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="hero-left">
+        <img src="{% static 'caregenius/images/dessin_patient_photo.png' %}" alt="patient" id="image-hero-left">
+        <h1>Analysez instantanément<br>vos médicaments et ordonnances</h1>
+        <p class="hero-sub">Recevez posologie, indications et précautions en quelques secondes</p>
+      </div>
+      <div class="hero-right">
+        <div class="upload-box">
+          <button class="btn-primary">Téléversez une photo</button>
+          <p class="upload-instructions">
+            ou déposez un fichier,<br>
+            collez une image ou une URL
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
