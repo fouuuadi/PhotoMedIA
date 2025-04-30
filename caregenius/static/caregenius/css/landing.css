@@ -1,0 +1,149 @@
+@import 'variables.css';
+
+
+* {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    background: #F1FFFA;
+    line-height: 1.5;
+  }
+  
+  /* Container centré */
+  .container {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  #logo{
+    width: 50px;
+  }
+
+  #logo-div{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  /* Header */
+  .site-header {
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-secondary);
+    text-decoration: none;
+  }
+  .main-nav a {
+    margin: 0 1rem;
+    color: #444;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .auth a {
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .btn-login {
+    color: #444;
+  }
+  .btn-signup {
+    background: var(--color-secondary);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+  }
+  
+  /* Hero */
+  .hero {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    margin: 0 auto;
+    justify-content: space-between;
+    padding: 4rem 0;
+  }
+  .hero-left {
+    flex: 1;
+    max-width: 50%;
+  }
+  #image-hero-left{
+    width: 300px;
+  }
+  .hero-left h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .hero-sub {
+    color: #555;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+  .hero-right {
+    flex: 1;
+    max-width: 45%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  /* Upload box */
+  .upload-box {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 3px 19px 50px -30px rgba(0, 0, 0, 0.1), -2px -1px 61px -6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: center;
+    width: 100%;
+    max-width: 360px;
+  }
+  .btn-primary {
+    background: var(--color-secondary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .btn-primary:hover {
+    background: rgb(52, 130, 255);
+  }
+  .upload-instructions {
+    color: #666;
+    font-size: 0. nine rem;
+    margin-top: 1rem;
+  }
+  
+  .text-color-primary{
+    color: var(--color-primary);
+  }
+  /* Responsive */
+  @media(max-width: 900px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+    }
+    .hero-left, .hero-right {
+      max-width: 100%;
+    }
+    .hero-left h1 {
+      font-size: 2rem;
+    }
+  }
+  

@@ -21,3 +21,6 @@ def inscription(request):
     #return HttpResponse('Hello')
     return render(request, 'caregenius/inscription.html')
 
+def landing(request):
+    # rend le template landing.html
+    return render(request, 'caregenius/landing.html')
