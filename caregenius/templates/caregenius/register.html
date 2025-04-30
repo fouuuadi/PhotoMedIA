@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
+</head>
+<body>
+    <h1>Créer un compte</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+        
+        <label>Nom :</label>
+        <input type="text" name="last_name" required><br>
+
+        <label>Prénoms :</label>
+        <input type="text" name="first_name" required><br>
+
+        <label>Sexe :</label>
+        <select name="gender" required>
+            <option value="M">Homme</option>
+            <option value="F">Femme</option>
+            <option value="O">Autre</option>
+        </select><br>
+
+        <label>Âge :</label>
+        <input type="number" name="age" required><br>
+
+        <label>Email :</label>
+        <input type="email" name="email" required><br>
+
+        <label>Mot de passe :</label>
+        <input type="password" name="password" required><br>
+
+        <label>Confirmer mot de passe :</label>
+        <input type="password" name="Cpassword" required><br>
+
+        <button type="submit">S'inscrire</button>
+    </form>
+</body>
+</html>
