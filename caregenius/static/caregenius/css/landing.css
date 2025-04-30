@@ -14,8 +14,14 @@
   
   /* Container centré */
   .container {
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
+  }
+
+  #all-link-header{
+    display: flex;
+    align-items: center;
+    width: 70%;
   }
 
   #logo{
@@ -71,7 +77,7 @@
   .hero {
     display: flex;
     align-items: center;
-    width: 60%;
+    width: 70%;
     margin: 0 auto;
     justify-content: space-between;
     padding: 4rem 0;
@@ -105,24 +111,38 @@
   /* Upload box */
   .upload-box {
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 3px 19px 50px -30px rgba(0, 0, 0, 0.1), -2px -1px 61px -6px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 3px 19px 50px -30px rgba(0, 0, 0, 0.3), -2px -1px 61px -6px rgba(0, 0, 0, 0.3);
+    padding: 8rem 4rem 8rem 4rem;
     text-align: center;
     width: 100%;
-    max-width: 360px;
+    max-width: 500px;
   }
+  @property --angle {
+    syntax: '<angle>';
+    initial-value: 45deg;
+    inherits: false;
+  }
+
+
   .btn-primary {
-    background: var(--color-secondary);
+    --angle: 45deg;
+  background: linear-gradient(
+    var(--angle),
+    var(--color-primary) 0%,
+    var(--color-accent) 40%,
+    var(--color-secondary) 80%
+  );
     color: #fff;
     border: none;
     border-radius: 8px;
     padding: 0.75rem 1.5rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     cursor: pointer;
+    transition: --angle 0.3s ease-in-out;
   }
   .btn-primary:hover {
-    background: rgb(52, 130, 255);
+    --angle: 230deg;
   }
   .upload-instructions {
     color: #666;

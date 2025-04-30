@@ -6,13 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PhotoMédIA – Accueil</title>
   <link rel="stylesheet" href="{% static 'caregenius/css/landing.css' %}">
+  <link rel="icon" href="{% static 'caregenius/images/logo_sans_texte.svg' %}">
 </head>
 <body>
 
   <!-- Header -->
   <header class="site-header">
     <div class="container">
-        <div id="logo-div">
+        <div id="all-link-header">
+          <div id="logo-div">
             <img src="{% static 'caregenius/images/logo_sans_texte.svg' %}" alt="logo" id="logo">
             <a href="#" class="logo-text">Photo<span class="text-color-primary">MédIA</span></a>
         </div>
@@ -21,6 +23,7 @@
         <a href="#">Fonctionnalités</a>
         <a href="#">Sécurité</a>
       </nav>
+        </div>
       <div class="auth">
         <!-- mettre le renvoie vers la page se connecter  -->
         <!-- mettre le renvoie vers la page s'inscrire  -->
@@ -43,8 +46,8 @@
         <div class="upload-box">
           <button class="btn-primary">Téléversez une photo</button>
           <p class="upload-instructions">
-            ou déposez un fichier,<br>
-            collez une image ou une URL
+            de votre boîte de médicaments ou<br>
+            de votre ordonnances
           </p>
         </div>
       </div>
