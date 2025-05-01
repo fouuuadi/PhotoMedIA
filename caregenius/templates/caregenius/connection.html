@@ -2,6 +2,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,39 @@
     <link rel="stylesheet" href="{% static 'caregenius/css/connection.css' %}">
     <script src="{% static 'caregenius/js/connection.js' %}"></script>
 </head>
-<body>
-    <h1>connection</h1>
 
+<body>
+    <!-- faudra mettre le header ici plus tard -->
+
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <div id="logo-div">
+                    <img src="{% static 'caregenius/images/logo_sans_texte.svg' %}" alt="logo" id="logo">
+                </div>
+                <div class="form-title">
+                    <h1>Connectez-vous à votre compte PhotoMédIA</h1>
+                </div>
+            </div>
+            <div class="form-footer">
+                <div class="form-group">
+                    <input type="email" class="input outline" placeholder="Email">
+                    <input type="password" class="input filled" placeholder="Password">
+                </div>
+                <button class="btn">
+                    Sign Up
+                </button>
+                <div class="form-footer-text">
+                    <p>Vous n'avez pas de compte ? <a href="{% url 'caregenius:inscription' %}">Inscrivez-vous</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="image-container">
+            <img src="{% static 'caregenius/images/dessin_patient_photo.png' %}" alt="Illustration PhotoMédIA"
+                class="illustration">
+        </div>
+
+    </div>
 </body>
+
 </html>
