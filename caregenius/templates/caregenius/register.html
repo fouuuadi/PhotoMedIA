@@ -1,47 +1,60 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Inscription</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inscription – PhotoMédIA</title>
+  <link rel="icon" href="{% static 'caregenius/images/logo.svg' %}">
+  <link rel="stylesheet" href="{% static 'caregenius/css/register.css' %}">
 </head>
+
 <body>
-    <h1>Créer un compte</h1>
+  <div class="container">
+    <div class="form-container">
+      <!-- En-tête du formulaire -->
+      <div class="form-header">
+        <div id="logo-div">
+          <img id="logo" src="{% static 'caregenius/images/logo_sans_texte.svg' %}" alt="PhotoMédIA">
+        </div>
+        <div class="form-title">
+          <h1>Créer un compte</h1>
+        </div>
+      </div>
 
-    {% if messages %}
-        {% for message in messages %}
-            <p style="color: red;">{{ message }}</p>
-        {% endfor %}
-    {% endif %}
+      <!-- Corps du formulaire -->
+      <div class="form-footer">
+        <form method="POST" action="{% url 'caregenius:register' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text"   name="last_name"  class="input outline" placeholder="Nom"                required>
+            <input type="text"   name="first_name" class="input outline" placeholder="Prénom"            required>
+            <select name="gender"               class="input outline" required>
+              <option value="" disabled selected>Sexe</option>
+              <option value="M">Homme</option>
+              <option value="F">Femme</option>
+              <option value="O">Autre</option>
+            </select>
+            <input type="number" name="age"        class="input outline" placeholder="Âge"               required>
+            <input type="number" name="height"     class="input outline" placeholder="Taille (cm)"      required>
+            <input type="number" name="weight"     class="input outline" placeholder="Poids (kg)"       required>
+            <input type="email"  name="email"      class="input outline" placeholder="Email"             required>
+            <input type="password" name="password" class="input filled"   placeholder="Mot de passe"      required>
+            <input type="password" name="Cpassword"class="input filled"   placeholder="Confirmer mot de passe" required>
+          </div>
 
-    <form method="POST" action="{% url 'register' %}">
-        {% csrf_token %}
-        
-        <label>Nom :</label>
-        <input type="text" name="last_name" required><br>
+          <button type="submit" class="btn">S'inscrire</button>
 
-        <label>Prénoms :</label>
-        <input type="text" name="first_name" required><br>
+          <div class="form-footer-text">
+            <p>Vous avez déjà un compte ? 
+              <a href="{% url 'caregenius:connection' %}">Connectez-vous</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
 
-        <label>Sexe :</label>
-        <select name="gender" required>
-            <option value="M">Homme</option>
-            <option value="F">Femme</option>
-            <option value="O">Autre</option>
-        </select><br>
-
-        <label>Âge :</label>
-        <input type="number" name="age" required><br>
-
-        <label>Email :</label>
-        <input type="email" name="email" required><br>
-
-        <label>Mot de passe :</label>
-        <input type="password" name="password" required><br>
-
-        <label>Confirmer mot de passe :</label>
-        <input type="password" name="Cpassword" required><br>
-
-        <button type="submit">S'inscrire</button>
-    </form>
+  </div>
 </body>
 </html>

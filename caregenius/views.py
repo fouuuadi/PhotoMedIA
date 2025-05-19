@@ -24,3 +24,7 @@ def inscription(request):
 def landing(request):
     # rend le template landing.html
     return render(request, 'caregenius/landing.html')
+
+def register(request):
+    # rend le template landing.html
+    return render(request, 'caregenius/register.html')
