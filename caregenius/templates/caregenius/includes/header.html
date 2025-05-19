@@ -2,12 +2,9 @@
 <header class="site-header">
   <div class="container-header">
     <div id="all-link-header">
-      <div id="logo-div">
         <div id="logo-div">
-            <img src="{% static 'caregenius/images/logo_sans_texte.svg' %}" alt="logo" id="logo">
-            <a href="#" class="logo-text">Photo<span class="text-color-primary">MédIA</span></a>
+            <a href="{% url 'caregenius:landing' %}" class="logo-text"><img src="{% static 'caregenius/images/logo_sans_texte.svg' %}" alt="logo" id="logo"> Photo<span class="text-color-primary">MédIA</span></a>
         </div>
-      </div>
       <nav class="main-nav">
         <a href="#">Analyse</a>
         <a href="#">Fonctionnalités</a>

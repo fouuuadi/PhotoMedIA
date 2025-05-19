@@ -23,6 +23,11 @@
     align-items: center;
     gap: 20px;
   }
+  #logo-div a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
 
  .site-header {
     background: #fff;
