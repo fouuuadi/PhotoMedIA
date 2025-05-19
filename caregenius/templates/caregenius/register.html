@@ -8,19 +8,19 @@
   <title>Inscription – PhotoMédIA</title>
   <link rel="icon" href="{% static 'caregenius/images/logo.svg' %}" />
   <link rel="stylesheet" href="{% static 'caregenius/css/register.css' %}" />
+  <link rel="stylesheet" href="{% static 'caregenius/css/header.css' %}">
 </head>
 
 <body>
+  {% include 'caregenius/includes/header.html' %}
+
   <div class="container">
     
     <!-- 1) Formulaire à gauche -->
     <div class="form-container">
 
-      <!-- En‐tête : logo + titre -->
+      <!-- En‐tête : titre -->
       <div class="form-header">
-        <div id="logo-div">
-          <img id="logo" src="{% static 'caregenius/images/logo_sans_texte.svg' %}" alt="PhotoMédIA" />
-        </div>
         <div class="form-title">
           <h1>Créer un compte</h1>
         </div>
