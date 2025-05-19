@@ -23,7 +23,7 @@ def connection(request):
             if check_password(password, user.password):
                 # 🔐 Stocker l'identifiant dans la session
                 request.session['user_id'] = user.id
-                request.session['email_user'] = user.email_user  # optionnel
+                request.session['email_user'] = user.email_user  
 
                 messages.success(request, 'Connexion réussie !')
                 return redirect('caregenius:landing')# proprement vers la page d'accueil
@@ -36,50 +36,48 @@ def connection(request):
 
 def register(request):
     if request.method == 'POST':
-        # Récupérer les données du formulaire
+        print("Formulaire soumis")
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         email_user = request.POST.get('email')
         password = request.POST.get('password')
+        confirm_password = request.POST.get('Cpassword')
         gender = request.POST.get('gender')
         age = request.POST.get('age')
         height = request.POST.get('height')
-        weight = request.POST.get('weight') 
-        pathology = "none"  
-        confirm_password = request.POST.get('Cpassword') 
-        # Hachage du mot de passe
+        weight = request.POST.get('weight')
+        pathology = "none"
+
         if password != confirm_password:
-            # Gérer l'erreur de confirmation de mot de passe
             messages.error(request, 'Les mots de passe ne correspondent pas.')
-            return render(request, 'caregenius/register.html', {'error': 'Les mots de passe ne correspondent pas.'})
+            return render(request, 'caregenius/register.html')
+
+        if User.objects.filter(email_user=email_user).exists():
+            messages.error(request, 'Un compte avec cet email existe déjà.')
+            return render(request, 'caregenius/register.html')
+
         hashed_password = make_password(password)
-        # Enregistrement dans la base de données
         try:
             User.objects.create(
-                    first_name=first_name,
-                    last_name=last_name,
-                    email_user=email_user,
-                    password=make_password(password),
-                    age=age,
-                    height=height,
-                    weight=weight,
-                    pathology=pathology
-                )
+                first_name=first_name,
+                last_name=last_name,
+                email_user=email_user,
+                password=hashed_password,
+                age=age,
+                height=height,
+                weight=weight,
+                pathology=pathology,
+                gender=gender
+            )
             messages.success(request, 'Inscription réussie !')
+            return redirect('caregenius:connection')  # redirection ici
         except Exception as e:
-            # Gérer l'erreur d'insertion
             messages.error(request, f'Erreur lors de l\'inscription : {str(e)}')
-            return render(request, 'caregenius/register.html', {'error': str(e)})
-        # Logique pour gérer l'inscription
-    
-    # Django va chercher Hello.html dans caregenius/templates/caregenius/
-    #return HttpResponse('Hello')
+            return render(request, 'caregenius/register.html')
+
     return render(request, 'caregenius/register.html')
 
 def landing(request):
     # rend le template landing.html
     return render(request, 'caregenius/landing.html')
 
-def register(request):
-    # rend le template register.html
-    return render(request, 'caregenius/register.html')

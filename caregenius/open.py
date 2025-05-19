@@ -1,54 +1,48 @@
 import easyocr
-import requests
+import openai
 from PIL import Image
 from io import BytesIO
-import openai
 
-# === CONFIGURATION ===
-OPENAI_API_KEY = "sk-..." 
-PROFILE = {
-    "sexe": "femme",
-    "âge": 65,
-    "poids": 60
-}
-image_url = "https://media.istockphoto.com/id/1199617301/fr/photo/bo%C3%AEte-de-m%C3%A9dicaments-contre-la-douleur-et-la-fi%C3%A8vre-du-parac%C3%A9tamol.jpg?b=1&s=612x612&w=0&k=20&c=oHYwM8TKebAWFp33SLKSL59RFZjWJuQDeyC-WfOrxGo="
+openai.api_key = "sk-..."  
 
-# === 1. EXTRACTION DE TEXTE VIA OCR ===
-print("\n--- Étape 1 : Extraction de texte ---\n")
-image = Image.open(BytesIO(requests.get(image_url).content)).convert("RGB")
-image.save("temp.jpg")
+def analyser_image_medicament(image_file, sexe, age, poids):
+    # === 1. OCR avec EasyOCR ===
+    reader = easyocr.Reader(['fr'], gpu=False)
+    image = Image.open(image_file).convert("RGB")
+    image.save("temp.jpg")  # Optionnel : pour debug ou log
 
-reader = easyocr.Reader(['fr']) 
-results = reader.readtext("temp.jpg")
+    results = reader.readtext("temp.jpg")
+    texte_extrait = "\n".join([text for _, text, _ in results]).strip()
 
-# Fusionner tous les morceaux de texte
-texte_extrait = "\n".join([text for _, text, _ in results])
-print(texte_extrait)
+    if not texte_extrait:
+        return "Aucun texte n'a été détecté sur l'image. Veuillez prendre une autre photo."
 
-# === 2. INTERPRÉTATION AVEC CHATGPT MEME SI C'EST MELANGE N'IMPORTE COMMENT? ON UTILISE UN MODELE TRES PUISSANT DONC PAS DE PROBLEME ===
-# print("\n--- Étape 2 : Envoi à ChatGPT ---\n")
-# openai.api_key = OPENAI_API_KEY
+    # === 2. Interprétation médicale avec OpenAI ===
+    prompt = f"""
+Voici le texte extrait d'un emballage ou d'une notice de médicament :
 
-# prompt = f"""
-# Voici le texte extrait d'un emballage ou d'une notice de médicament :
+{texte_extrait}
 
-# {texte_extrait}
+Sachant que le patient est une {sexe} de {age} ans, pesant {poids} kg :
 
-# Sachant que le patient est une {PROFILE['sexe']} de {PROFILE['âge']} ans, pesant {PROFILE['poids']} kg :
+- Résume les informations importantes.
+- Mentionne les contre-indications potentielles ou précautions.
+- Donne un avis général utile.
+Si le contenu n'est pas médical ou semble sans rapport, réponds simplement : "Veuillez prendre une autre photo."
+"""
 
-# - Résume les informations importantes.
-# - Mentionne les contre-indications potentielles ou précautions.
-# - Donne un avis général utile.
-# """
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "Tu es un assistant médical très précis."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.5
+        )
 
-# response = openai.ChatCompletion.create(
-#     model="gpt-4",
-#     messages=[
-#         {"role": "system", "content": "Tu es un assistant médical très précis."},
-#         {"role": "user", "content": prompt}
-#     ],
-#     temperature=0.7
-# )
+        output = response['choices'][0]['message']['content'].strip()
+        return output
 
-# print("\n--- Réponse de ChatGPT ---\n")
-# print(response['choices'][0]['message']['content'])
+    except Exception as e:
+        return f"Une erreur est survenue lors de l'analyse : {str(e)}"

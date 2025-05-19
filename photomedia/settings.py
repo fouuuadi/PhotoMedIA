@@ -1,4 +1,3 @@
-
 """
 Django settings for photomedia project.
 
@@ -25,7 +24,7 @@ load_dotenv(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+SECRET_KEY = 'django-insecure-19c75#8zc60rsu*4*+rj&ca0(fmq_a(yyf3z%)exavd&$bg+7w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -35,13 +34,13 @@ ALLOWED_HOSTS = []
 
 # Database Supabase
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'OPTIONS': {'sslmode': 'require'},
-        # le reste (NAME, USER, PASSWORD, HOST, PORT…) vient de dj_database_url
-    }
+    'default': dj_database_url.parse(
+        os.getenv('SUPABASE_DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
-print(os.getenv('SUPABASE_DATABASE_URL'))
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -138,4 +137,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
