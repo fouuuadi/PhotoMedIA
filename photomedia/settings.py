@@ -35,11 +35,11 @@ ALLOWED_HOSTS = []
 
 # Database Supabase
 DATABASES = {
-    'default': dj_database_url.parse(
-        os.getenv('SUPABASE_DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'OPTIONS': {'sslmode': 'require'},
+        # le reste (NAME, USER, PASSWORD, HOST, PORT…) vient de dj_database_url
+    }
 }
 print(os.getenv('SUPABASE_DATABASE_URL'))
 # Application definition

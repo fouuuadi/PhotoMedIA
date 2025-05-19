@@ -26,5 +26,5 @@ def landing(request):
     return render(request, 'caregenius/landing.html')
 
 def register(request):
-    # rend le template landing.html
+    # rend le template register.html
     return render(request, 'caregenius/register.html')

@@ -1,49 +1,73 @@
-<!-- pour charger les fichiers statiques -->
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connection</title>
-    <link rel="icon" href="{% static 'caregenius/images/logo.svg' %}">
-    <link rel="stylesheet" href="{% static 'caregenius/css/connection.css' %}">
-    <script src="{% static 'caregenius/js/connection.js' %}"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connexion – PhotoMédIA</title>
+  <link rel="icon" href="{% static 'caregenius/images/logo.svg' %}">
+  <link rel="stylesheet" href="{% static 'caregenius/css/connection.css' %}">
+  <script src="{% static 'caregenius/js/connection.js' %}"></script>
 </head>
 
 <body>
-    <!-- faudra mettre le header ici plus tard -->
+  <div class="container">
+    <div class="form-container">
 
-    <div class="container">
-        <div class="form-container">
-            <div class="form-header">
-                <div id="logo-div">
-                    <img src="{% static 'caregenius/images/logo_sans_texte.svg' %}" alt="logo" id="logo">
-                </div>
-                <div class="form-title">
-                    <h1>Connectez-vous</h1>
-                </div>
-            </div>
-            <div class="form-footer">
-                <div class="form-group">
-                    <input type="email" class="input outline" placeholder="Email">
-                    <input type="password" class="input filled" placeholder="Password">
-                </div>
-                <button class="btn">
-                    Sign Up
-                </button>
-                <div class="form-footer-text">
-                    <p>Vous n'avez pas de compte ? <a href="{% url 'caregenius:inscription' %}">Inscrivez-vous</a></p>
-                </div>
-            </div>
+      <!-- En-tête : logo + titre -->
+      <div class="form-header">
+        <div id="logo-div">
+          <img id="logo" src="{% static 'caregenius/images/logo_sans_texte.svg' %}" alt="PhotoMédIA">
         </div>
-        <div class="image-container">
-            <img src="{% static 'caregenius/images/dessin_patient_photo.png' %}" alt="Illustration PhotoMédIA"
-                class="illustration">
+        <div class="form-title">
+          <h1>Connectez-vous</h1>
         </div>
+      </div>
+
+      <!-- Formulaire de connexion -->
+      <form method="POST" action="{% url 'caregenius:connection' %}">
+        {% csrf_token %}
+        <div class="form-footer">
+          <div class="form-group">
+            <input
+              type="email"
+              name="email"
+              class="input outline"
+              placeholder="Email"
+              required
+            >
+            <input
+              type="password"
+              name="password"
+              class="input filled"
+              placeholder="Mot de passe"
+              required
+            >
+          </div>
+          <button type="submit" class="btn">
+            Se connecter
+          </button>
+          <div class="form-footer-text">
+            <p>
+              Vous n’avez pas de compte ?
+              <a href="{% url 'caregenius:inscription' %}">Inscrivez-vous</a>
+            </p>
+          </div>
+        </div>
+      </form>
 
     </div>
+
+    <!-- Illustration à droite -->
+    <div class="image-container">
+      <img
+        src="{% static 'caregenius/images/dessin_patient_login.png' %}"
+        alt="Illustration PhotoMédIA"
+        class="illustration"
+      >
+    </div>
+  </div>
 </body>
 
 </html>
