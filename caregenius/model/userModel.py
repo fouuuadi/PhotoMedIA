@@ -11,7 +11,7 @@ class User(models.Model):
     last_name   = models.CharField(max_length=150)
     email_user  = models.EmailField(unique=True)
     password    = models.CharField(max_length=128)
-    
+    gender      = models.CharField(max_length=10, choices=[('M', 'Homme'), ('F', 'Femme'), ('O', 'Autre')], default='M')
     age         = models.IntegerField()
     height      = models.FloatField(help_text="Taille en mètres")
     weight      = models.FloatField(help_text="Poids en kilogrammes")

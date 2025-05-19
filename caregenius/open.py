@@ -1,38 +1,54 @@
+import easyocr
+import requests
+from PIL import Image
+from io import BytesIO
 import openai
-import time
 
-from openai import OpenAI
+# === CONFIGURATION ===
+OPENAI_API_KEY = "sk-..." 
+PROFILE = {
+    "sexe": "femme",
+    "âge": 65,
+    "poids": 60
+}
+image_url = "https://media.istockphoto.com/id/1199617301/fr/photo/bo%C3%AEte-de-m%C3%A9dicaments-contre-la-douleur-et-la-fi%C3%A8vre-du-parac%C3%A9tamol.jpg?b=1&s=612x612&w=0&k=20&c=oHYwM8TKebAWFp33SLKSL59RFZjWJuQDeyC-WfOrxGo="
 
-client = OpenAI(
-  api_key="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"
-)
+# === 1. EXTRACTION DE TEXTE VIA OCR ===
+print("\n--- Étape 1 : Extraction de texte ---\n")
+image = Image.open(BytesIO(requests.get(image_url).content)).convert("RGB")
+image.save("temp.jpg")
 
-def generate_haiku(prompt):
-    max_retries = 3
-    retry_delay = 5  # seconds
+reader = easyocr.Reader(['fr']) 
+results = reader.readtext("temp.jpg")
 
-    for attempt in range(max_retries):
-        try:
-            completion = client.chat.completions.create(
-                model="gpt-4o-mini",
-                store=True,
-                messages=[{"role": "user", "content": prompt}]
-            )
-            return completion.choices[0].message.content
-        except openai.RateLimitError as e:
-            print(f"RateLimitError: {e}")
-            if attempt < max_retries - 1:
-                print(f"Retrying in {retry_delay} seconds...")
-                time.sleep(retry_delay)
-                retry_delay *= 2  # Exponential backoff
-            else:
-                print("Max retries reached.  Please check your OpenAI account and usage.")
-                return None
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
-            return None
+# Fusionner tous les morceaux de texte
+texte_extrait = "\n".join([text for _, text, _ in results])
+print(texte_extrait)
 
-haiku = generate_haiku("write a haiku about ai")
+# === 2. INTERPRÉTATION AVEC CHATGPT MEME SI C'EST MELANGE N'IMPORTE COMMENT? ON UTILISE UN MODELE TRES PUISSANT DONC PAS DE PROBLEME ===
+# print("\n--- Étape 2 : Envoi à ChatGPT ---\n")
+# openai.api_key = OPENAI_API_KEY
 
-if haiku:
-    print(haiku)
+# prompt = f"""
+# Voici le texte extrait d'un emballage ou d'une notice de médicament :
+
+# {texte_extrait}
+
+# Sachant que le patient est une {PROFILE['sexe']} de {PROFILE['âge']} ans, pesant {PROFILE['poids']} kg :
+
+# - Résume les informations importantes.
+# - Mentionne les contre-indications potentielles ou précautions.
+# - Donne un avis général utile.
+# """
+
+# response = openai.ChatCompletion.create(
+#     model="gpt-4",
+#     messages=[
+#         {"role": "system", "content": "Tu es un assistant médical très précis."},
+#         {"role": "user", "content": prompt}
+#     ],
+#     temperature=0.7
+# )
+
+# print("\n--- Réponse de ChatGPT ---\n")
+# print(response['choices'][0]['message']['content'])
