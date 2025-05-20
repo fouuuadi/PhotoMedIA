@@ -6,30 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PhotoMédIA – Accueil</title>
   <link rel="stylesheet" href="{% static 'caregenius/css/landing.css' %}">
+  <link rel="stylesheet" href="{% static 'caregenius/css/header.css' %}">
+  <link rel="icon" href="{% static 'caregenius/images/logo_sans_texte.svg' %}">
 </head>
 <body>
 
   <!-- Header -->
-  <header class="site-header">
-    <div class="container">
-        <div id="logo-div">
-            <img src="{% static 'caregenius/images/logo_sans_texte.svg' %}" alt="logo" id="logo">
-            <a href="#" class="logo-text">Photo<span class="text-color-primary">MédIA</span></a>
-        </div>
-      <nav class="main-nav">
-        <a href="#">Analyse</a>
-        <a href="#">Fonctionnalités</a>
-        <a href="#">Sécurité</a>
-      </nav>
-      <div class="auth">
-        <!-- mettre le renvoie vers la page se connecter  -->
-        <!-- mettre le renvoie vers la page s'inscrire  -->
-        <a href="/caregenius/connection" class="btn-login">Se connecter</a>
-        <a href="/caregenius/inscription" class="btn-signup">S'inscrire</a>
-        
-      </div>
-    </div>
-  </header>
+  {% include 'caregenius/includes/header.html' %}
+
 
   <!-- Hero -->
   <main>
@@ -43,8 +27,8 @@
         <div class="upload-box">
           <button class="btn-primary">Téléversez une photo</button>
           <p class="upload-instructions">
-            ou déposez un fichier,<br>
-            collez une image ou une URL
+            de votre boîte de médicaments ou<br>
+            de votre ordonnances
           </p>
         </div>
       </div>

@@ -1,0 +1,70 @@
+@import 'variables.css';
+
+
+/* Header */
+ .container-header {
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  #all-link-header{
+    display: flex;
+    align-items: center;
+    width: 70%;
+  }
+
+  #logo{
+    width: 50px;
+  }
+
+  #logo-div{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  #logo-div a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+ .site-header {
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .site-header .container-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-secondary);
+    text-decoration: none;
+  }
+  .main-nav a {
+    margin: 0 1rem;
+    color: #444;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .auth a {
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .btn-login {
+    color: #444;
+  }
+  .btn-signup {
+    background: var(--color-secondary);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+  }
+  .text-color-primary{
+    color: var(--color-primary);
+  }

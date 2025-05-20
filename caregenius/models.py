@@ -18,6 +18,7 @@ class User(models.Model):
     age         = models.IntegerField()
     height      = models.FloatField(help_text="Taille en mètres")
     weight      = models.FloatField(help_text="Poids en kilogrammes")
+    gender      = models.CharField(max_length=10, choices=[('M', 'Homme'), ('F', 'Femme'), ('O', 'Autre')], default='M')
     
     # pour un texte libre, on utilise TextField
     pathology   = models.TextField(blank=True)

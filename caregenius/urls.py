@@ -10,5 +10,6 @@ urlpatterns = [
     path("connection/", views.connection, name="connection"),
     path("inscription/", views.inscription, name="inscription"),
     path("dashboard/", views.dashboard, name="dashboard"),
+    path("register/", views.register, name="register"),
     path("landing/", landing, name="landing")
 ]

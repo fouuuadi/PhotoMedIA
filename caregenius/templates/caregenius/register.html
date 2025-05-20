@@ -1,47 +1,80 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Inscription</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inscription – PhotoMédIA</title>
+  <link rel="icon" href="{% static 'caregenius/images/logo.svg' %}" />
+  <link rel="stylesheet" href="{% static 'caregenius/css/register.css' %}" />
+  <link rel="stylesheet" href="{% static 'caregenius/css/header.css' %}">
 </head>
+
 <body>
-    <h1>Créer un compte</h1>
+  {% include 'caregenius/includes/header.html' %}
 
-    {% if messages %}
-        {% for message in messages %}
-            <p style="color: red;">{{ message }}</p>
-        {% endfor %}
-    {% endif %}
+  <div class="container">
+    
+    <!-- 1) Formulaire à gauche -->
+    <div class="form-container">
 
-    <form method="POST" action="{% url 'register' %}">
+      <!-- En‐tête : titre -->
+      <div class="form-header">
+        <div class="form-title">
+          <h1>Créer un compte</h1>
+        </div>
+      </div>
+
+      <!-- Corps du formulaire -->
+      <form method="POST" action="{% url 'caregenius:register' %}">
         {% csrf_token %}
-        
-        <label>Nom :</label>
-        <input type="text" name="last_name" required><br>
+        <div class="form-footer">
 
-        <label>Prénoms :</label>
-        <input type="text" name="first_name" required><br>
+          {% if messages %}
+            {% for message in messages %}
+              <p style="color: red;">{{ message }}</p>
+            {% endfor %}
+          {% endif %}
 
-        <label>Sexe :</label>
-        <select name="gender" required>
-            <option value="M">Homme</option>
-            <option value="F">Femme</option>
-            <option value="O">Autre</option>
-        </select><br>
+          <div class="form-group">
+            <input type="text" name="last_name"   class="input outline" placeholder="Nom"                      required />
+            <input type="text" name="first_name"  class="input outline" placeholder="Prénom"                   required />
+            <select   name="gender"              class="input outline" required>
+              <option value="" disabled selected>Sexe</option>
+              <option value="M">Homme</option>
+              <option value="F">Femme</option>
+              <option value="O">Autre</option>
+            </select>
+            <input type="number" name="age"       class="input outline" placeholder="Âge"                      required />
+            <input type="number" name="height"    class="input outline" placeholder="Taille (cm)"             required />
+            <input type="number" name="weight"    class="input outline" placeholder="Poids (kg)"              required />
+            <input type="email"  name="email"     class="input outline" placeholder="Email"                    required />
+            <input type="password" name="password" class="input filled"  placeholder="Mot de passe"            required />
+            <input type="password" name="Cpassword"class="input filled"  placeholder="Confirmer mot de passe"  required />
+          </div>
 
-        <label>Âge :</label>
-        <input type="number" name="age" required><br>
+          <button type="submit" class="btn">S'inscrire</button>
 
-        <label>Email :</label>
-        <input type="email" name="email" required><br>
+          <div class="form-footer-text">
+            <p>Vous avez déjà un compte ?
+              <a href="{% url 'caregenius:connection' %}">Connectez-vous</a>
+            </p>
+          </div>
 
-        <label>Mot de passe :</label>
-        <input type="password" name="password" required><br>
+        </div>
+      </form>
+    </div>
 
-        <label>Confirmer mot de passe :</label>
-        <input type="password" name="Cpassword" required><br>
+    <!-- 2) Illustration à droite -->
+    <div class="image-container">
+      <img
+        src="{% static 'caregenius/images/dessin_patient_signup.png' %}"
+        alt="Illustration PhotoMédIA"
+        class="illustration"
+      />
+    </div>
 
-        <button type="submit">S'inscrire</button>
-    </form>
+  </div>
 </body>
 </html>

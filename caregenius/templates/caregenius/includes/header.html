@@ -1,0 +1,19 @@
+{% load static %}
+<header class="site-header">
+  <div class="container-header">
+    <div id="all-link-header">
+        <div id="logo-div">
+            <a href="{% url 'caregenius:landing' %}" class="logo-text"><img src="{% static 'caregenius/images/logo_sans_texte.svg' %}" alt="logo" id="logo"> Photo<span class="text-color-primary">MédIA</span></a>
+        </div>
+      <nav class="main-nav">
+        <a href="#">Analyse</a>
+        <a href="#">Fonctionnalités</a>
+        <a href="#">Sécurité</a>
+      </nav>
+    </div>
+    <div class="auth">
+      <a href="{% url 'caregenius:connection' %}" class="btn-login">Se connecter</a>
+      <a href="{% url 'caregenius:register'   %}" class="btn-signup">S'inscrire</a>
+    </div>
+  </div>
+</header>
