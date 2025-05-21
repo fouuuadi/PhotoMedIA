@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .resultat-box {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    pre {
+      white-space: pre-wrap; /* Permet le retour à la ligne */
+      word-wrap: break-word; /* Permet de couper les mots longs */
+    }
+  </style>
+</head>
+<body>
+  {% block content %}
+    <h2>Résultat de l'analyse</h2>
+    <div class="resultat-box">
+      <pre>{{ result }}</pre>
+    </div>
+    <a href="{% url 'caregenius:landing' %}">Retour</a>
+  {% endblock %}
+</body>
+</html>

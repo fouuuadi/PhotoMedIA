@@ -1,48 +1,70 @@
+import os
+from openai import OpenAI
+from dotenv import load_dotenv
 import easyocr
-import openai
 from PIL import Image
+import numpy as np
 from io import BytesIO
+import requests
 
-openai.api_key = "sk-..."  
+# Chargement de la clé API depuis le fichier .env
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-def analyser_image_medicament(image_file, sexe, age, poids, pathologies, grossesse):
+def analyser_image(image_file, sexe, age, poids, taille, pathologies, grossesse):
     # === 1. OCR avec EasyOCR ===
     reader = easyocr.Reader(['fr'], gpu=False)
-    image = Image.open(image_file).convert("RGB")
-    image.save("temp.jpg")  
 
-    results = reader.readtext("temp.jpg")
+    # Chargement de l'image locale ou distante
+    if isinstance(image_file, str) and image_file.startswith("http"):
+        response = requests.get(image_file)
+        image = Image.open(BytesIO(response.content)).convert("RGB")
+    else:
+        image = Image.open(image_file).convert("RGB")
+
+    image_np = np.array(image)
+    results = reader.readtext(image_np)
     texte_extrait = "\n".join([text for _, text, _ in results]).strip()
 
     if not texte_extrait:
         return "Aucun texte n'a été détecté sur l'image. Veuillez prendre une autre photo."
 
+    print("Texte extrait :\n", texte_extrait)
+
     # === 2. Interprétation médicale avec OpenAI ===
     prompt = f"""
-Voici le texte extrait d'un emballage ou d'une notice de médicament :
+Voici le texte extrait d'une ordonnance ou d'une notice de médicament :
 
 {texte_extrait}
 
-Sachant que le patient est une {sexe} de {age} ans, pesant {poids} kg avec les pathologies suivantes : {pathologies} et est {'enceinte' if grossesse else 'non enceinte'}.
+Sachant que le patient est une {sexe} de {age} ans de taille {taille} cm, pesant {poids} kg avec les pathologies suivantes : {pathologies} et est {'enceinte' if grossesse else 'non enceinte'}.
 
 - Résume les informations importantes.
 - Mentionne les contre-indications potentielles ou précautions.
 - Donne un avis général utile.
-Si le contenu n'est pas médical ou semble sans rapport, réponds simplement : "Veuillez prendre une autre photo."
+Si le contenu n'est pas médical ou semble sans rapport, réponds simplement : "Veuillez prendre une autre photo." Suivie du contenu de l'ordonnance ou de la notice.
 """
 
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
+        response = client.chat.completions.create(
+            model="gpt-4o",
             messages=[
-                {"role": "system", "content": "Tu es un assistant médical très précis."},
+                {"role": "system", "content": "Tu es un assistant médical très précis. Il peut y avoir des erreurs dans le texte extrait, mais tu dois te concentrer sur les informations médicales pertinentes."},
                 {"role": "user", "content": prompt}
             ],
             temperature=0.5
         )
-
-        output = response['choices'][0]['message']['content'].strip()
-        return output
+        print("Réponse de l'API :\n", response.choices[0].message.content.strip())
+        return response.choices[0].message.content.strip()
+    
 
     except Exception as e:
         return f"Une erreur est survenue lors de l'analyse : {str(e)}"
+
+# Test
+if __name__ == "__main__":
+    result = analyser_image(
+        "C:/Users/modes/Downloads/doliprane.jpg",  
+        "femme", 30, 65,171, "hypertension", False
+    )
+    print("\nRésultat de l'analyse :\n", result)

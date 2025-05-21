@@ -24,16 +24,36 @@
         <p class="hero-sub">Recevez posologie, indications et précautions en quelques secondes</p>
       </div>
       <div class="hero-right">
-        <div class="upload-box">
-          <button class="btn-primary">Téléversez une photo</button>
-          <p class="upload-instructions">
-            de votre boîte de médicaments ou<br>
-            de votre ordonnances
-          </p>
-        </div>
+        <form id="upload-form" method="post" enctype="multipart/form-data" action="{% url 'caregenius:analyse_image' %}">
+          {% csrf_token %}
+          <div class="upload-box">
+            <input type="file" id="file-input" name="photo" accept="image/*" style="display: none;" onchange="handleImageChange(event)">
+            <button type="button" class="btn-primary" onclick="document.getElementById('file-input').click()">Téléversez une photo</button>
+            <p class="upload-instructions">
+              de votre boîte de médicaments ou<br>
+              de votre ordonnance
+            </p>
+            <div id="preview-container" style="margin-top: 10px;">
+              <img id="image-preview" src="#" alt="Aperçu" style="display: none; max-width: 100%; height: auto; border-radius: 8px;" />
+            </div>
+            <button type="submit" class="btn-primary" style="margin-top: 10px; display: none;">Analyser</button>
+          </div>
+        </form>
       </div>
     </section>
   </main>
 
 </body>
+<script>
+  function handleImageChange(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const preview = document.getElementById('image-preview');
+      const submitButton = document.querySelector('button[type="submit"]');
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = 'block';
+      submitButton.style.display = 'block';
+    }
+  }
+</script>
 </html>

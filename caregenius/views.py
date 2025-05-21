@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib import messages
 from .models import User
+from .open import analyser_image
 
 # Create your views here.
 def index(request):
@@ -83,6 +84,34 @@ def register(request):
 def landing(request):
     # rend le template landing.html
     return render(request, 'caregenius/landing.html')
+
+#analyse l'image et renvoie le résultat
+def analyse_image(request):
+    # Vérifie si l'utilisateur est connecté
+    if 'user_id' not in request.session:
+        return redirect('caregenius:connection')
+
+    user_id = request.session['user_id']
+    user = User.objects.get(id=user_id)
+
+    if request.method == 'POST' and request.FILES.get('photo'):
+        image_file = request.FILES.get('photo')
+        print("Image reçue :", image_file.name)
+        resultat = analyser_image(
+            image_file,
+            user.gender,
+            user.age,
+            user.weight,
+            user.height,
+            user.pathology,
+            user.is_pregnant
+        )
+        # Récupérer le texte extrait et le résultat de l'analyse et l'envoyer au template
+        return render(request, 'caregenius/analyser_image.html', {
+            'result': resultat
+        })
+
+
 
 #envoi des informations de l'utilisateur à la page dashboard
 def profil(request):
