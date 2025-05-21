@@ -36,23 +36,36 @@
               <p style="color: red;">{{ message }}</p>
             {% endfor %}
           {% endif %}
+        <div class="form-group">
+          <input type="text" name="pseudo" class="input outline" placeholder="Pseudo" required />
 
-          <div class="form-group">
-            <input type="text" name="last_name"   class="input outline" placeholder="Nom"                      required />
-            <input type="text" name="first_name"  class="input outline" placeholder="Prénom"                   required />
-            <select   name="gender"              class="input outline" required>
-              <option value="" disabled selected>Sexe</option>
-              <option value="M">Homme</option>
-              <option value="F">Femme</option>
-              <option value="O">Autre</option>
+          <select name="gender" id="gender" class="input outline" required onchange="handleGenderChange()">
+            <option value="" disabled selected>Sexe</option>
+            <option value="M">Homme</option>
+            <option value="F">Femme</option>
+            <option value="O">Autre</option>
+          </select>
+
+          <div id="pregnancy-group" style="display: none;">
+            <label for="pregnant">Êtes-vous enceinte ?</label>
+            <select name="pregnant" id="pregnant" class="input outline">
+              <option value="" disabled selected>Choisissez</option>
+              <option value="yes">Oui</option>
+              <option value="no">Non</option>
             </select>
-            <input type="number" name="age"       class="input outline" placeholder="Âge"                      required />
-            <input type="number" name="height"    class="input outline" placeholder="Taille (cm)"             required />
-            <input type="number" name="weight"    class="input outline" placeholder="Poids (kg)"              required />
-            <input type="email"  name="email"     class="input outline" placeholder="Email"                    required />
-            <input type="password" name="password" class="input filled"  placeholder="Mot de passe"            required />
-            <input type="password" name="Cpassword"class="input filled"  placeholder="Confirmer mot de passe"  required />
           </div>
+
+          <input type="number" name="age" class="input outline" placeholder="Âge" required />
+          <input type="number" name="height" class="input outline" placeholder="Taille (cm)" required />
+          <input type="number" name="weight" class="input outline" placeholder="Poids (kg)" required />
+          <input type="password" name="password" class="input filled" placeholder="Mot de passe" required />
+          <input type="password" name="Cpassword" class="input filled" placeholder="Confirmer mot de passe" required />
+
+          <textarea name="pathology" placeholder="Listez chaque pathologie, séparée par une virgule"></textarea>
+        </div>
+
+
+
 
           <button type="submit" class="btn">S'inscrire</button>
 
@@ -77,4 +90,11 @@
 
   </div>
 </body>
+<script>
+  function handleGenderChange() {
+    const gender = document.getElementById("gender").value;
+    const pregnancyGroup = document.getElementById("pregnancy-group");
+    pregnancyGroup.style.display = (gender === "F") ? "block" : "none";
+  }
+</script>
 </html>

@@ -5,11 +5,11 @@ from io import BytesIO
 
 openai.api_key = "sk-..."  
 
-def analyser_image_medicament(image_file, sexe, age, poids):
+def analyser_image_medicament(image_file, sexe, age, poids, pathologies, grossesse):
     # === 1. OCR avec EasyOCR ===
     reader = easyocr.Reader(['fr'], gpu=False)
     image = Image.open(image_file).convert("RGB")
-    image.save("temp.jpg")  # Optionnel : pour debug ou log
+    image.save("temp.jpg")  
 
     results = reader.readtext("temp.jpg")
     texte_extrait = "\n".join([text for _, text, _ in results]).strip()
@@ -23,7 +23,7 @@ Voici le texte extrait d'un emballage ou d'une notice de médicament :
 
 {texte_extrait}
 
-Sachant que le patient est une {sexe} de {age} ans, pesant {poids} kg :
+Sachant que le patient est une {sexe} de {age} ans, pesant {poids} kg avec les pathologies suivantes : {pathologies} et est {'enceinte' if grossesse else 'non enceinte'}.
 
 - Résume les informations importantes.
 - Mentionne les contre-indications potentielles ou précautions.

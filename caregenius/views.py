@@ -14,16 +14,15 @@ def index(request):
 
 def connection(request):
     if request.method == 'POST':
-        email_user = request.POST.get('email')
+        pseudo_user = request.POST.get('pseudo')
         password = request.POST.get('password')
 
         try:
-            user = User.objects.get(email_user=email_user)
+            user = User.objects.get(pseudo=pseudo_user)
             
             if check_password(password, user.password):
                 # 🔐 Stocker l'identifiant dans la session
                 request.session['user_id'] = user.id
-                request.session['email_user'] = user.email_user  
 
                 messages.success(request, 'Connexion réussie !')
                 return redirect('caregenius:landing')# proprement vers la page d'accueil
@@ -37,37 +36,41 @@ def connection(request):
 def register(request):
     if request.method == 'POST':
         print("Formulaire soumis")
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        email_user = request.POST.get('email')
+        pseudo = request.POST.get('pseudo')
         password = request.POST.get('password')
         confirm_password = request.POST.get('Cpassword')
         gender = request.POST.get('gender')
         age = request.POST.get('age')
         height = request.POST.get('height')
         weight = request.POST.get('weight')
-        pathology = "none"
+        pathology = request.POST.get('pathology')
+        pregnant = request.POST.get('pregnant')
+        if pregnant == 'yes':
+            is_pregnant = True
+        elif pregnant == 'no':
+            is_pregnant = False
+        else:
+            is_pregnant = None
 
         if password != confirm_password:
             messages.error(request, 'Les mots de passe ne correspondent pas.')
             return render(request, 'caregenius/register.html')
 
-        if User.objects.filter(email_user=email_user).exists():
-            messages.error(request, 'Un compte avec cet email existe déjà.')
+        if User.objects.filter(pseudo=pseudo).exists():
+            messages.error(request, 'Un compte avec ce pseudo existe déjà.')
             return render(request, 'caregenius/register.html')
 
         hashed_password = make_password(password)
         try:
             User.objects.create(
-                first_name=first_name,
-                last_name=last_name,
-                email_user=email_user,
+                pseudo=pseudo,
                 password=hashed_password,
                 age=age,
                 height=height,
                 weight=weight,
                 pathology=pathology,
-                gender=gender
+                gender=gender,
+                is_pregnant=is_pregnant
             )
             messages.success(request, 'Inscription réussie !')
             return redirect('caregenius:connection')  # redirection ici
@@ -80,4 +83,24 @@ def register(request):
 def landing(request):
     # rend le template landing.html
     return render(request, 'caregenius/landing.html')
+
+#envoi des informations de l'utilisateur à la page dashboard
+def profil(request):
+    # Vérifie si l'utilisateur est connecté
+    if 'user_id' not in request.session:
+        return redirect('caregenius:connection')
+
+    user_id = request.session['user_id']
+    user = User.objects.get(id=user_id)
+
+    # Récupère les informations de l'utilisateur
+    context = {
+        'pseudo': user.pseudo,
+        'height': user.height,
+        'weight': user.weight,
+        'pathology': user.pathology,
+        'gender': user.gender
+    }
+    # Rendre le template dashboard.html avec les informations de l'utilisateur  
+    return render(request, 'caregenius/dashboard.html', context)
 
