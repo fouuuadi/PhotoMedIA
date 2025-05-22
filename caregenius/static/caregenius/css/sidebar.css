@@ -218,3 +218,14 @@ body.dark .switch::before{
 .sidebar:not(.close) .toggle {
     transform: rotate(180deg);
 }
+
+/* Fond et couleur du lien actif */
+.sidebar .menu-links li.active > a {
+    background-color: #51F9B8 !important;
+    color: #00796b !important;
+}
+/* Icône et texte */
+.sidebar .menu-links li.active > a .icon,
+.sidebar .menu-links li.active > a .text {
+    color: #00796b !important;
+}

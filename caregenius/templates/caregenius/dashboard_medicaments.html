@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'caregenius/css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'caregenius/css/dashboard_medicaments.css' %}">
+    <link rel="stylesheet" href="{% static 'caregenius/css/sidebar.css' %}">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <title>dashboard</title>
+</head>
+<body>
+    {% include "caregenius/include/sidebar.html" %}
+<section class="home">
+    <div class="header_medicaments">Médicaments</div>
+    <div class="card_medicaments none">
+        <div class="card_medicaments_header">
+            <h2>Résultats</h2>
+        </div>
+        <div class="card_medicaments_body">
+            <h2>text du resultat du call de l'api qui traite les photos </h2>
+        </div> 
+    </div>   
+        <div class="upload-container">
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input type="file" id="fileInput" name="image" accept="image/*" hidden>
+                <div id="dropArea" class="drop-area">
+                    <i class='bx bx-image icon-upload'></i>
+                    <p>Glissez-déposez une image ou cliquez pour parcourir</p>
+                    <button type="button" id="browseBtn">Choisir un fichier</button>
+                </div>
+                <div id="preview"></div>
+            </form>
+
+            <button type="submit" id="submitBtn" class="btn_medicaments">
+                Valider
+            </button>
+        </div>
+    
+
+
+</section>
+</body>
+<script src="{% static 'caregenius/js/dashboard_medicaments.js' %}"></script>
+<script src="{% static 'caregenius/js/sidebar.js' %}"></script>
+<!-- <script src="{% static 'caregenius/js/script.js' %}"></script> -->
+</html>

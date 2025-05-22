@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'caregenius/css/variables.css' %}">
-    <link rel="stylesheet" href="{% static 'caregenius/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'caregenius/css/dashboard_radiographies.css' %}">
     <link rel="stylesheet" href="{% static 'caregenius/css/sidebar.css' %}">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <title>dashboard</title>
@@ -13,12 +13,13 @@
 <body>
     {% include "caregenius/include/sidebar.html" %}
 <section class="home">
-    <div class="text">Dashboard</div>
+    <div class="text">Radiographies</div>
     <div class="card">
         <h2>Résultats</h2>
     </div>
 </section>
 </body>
 <script src="{% static 'caregenius/js/dashboard.js' %}"></script>
+<script src="{% static 'caregenius/js/sidebar.js' %}"></script>
 <!-- <script src="{% static 'caregenius/js/script.js' %}"></script> -->
 </html>

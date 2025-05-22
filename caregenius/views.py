@@ -25,9 +25,18 @@ def landing(request):
     # rend le template landing.html
     return render(request, 'caregenius/landing.html')
 
-def dashboard(request):
+def dashboard_medicaments(request):
     # rend le template dashboard.html
-    return render(request, 'caregenius/dashboard.html')
+    return render(request, 'caregenius/dashboard_medicaments.html')
+
+def dashboard_ordonnances(request):
+    # rend le template dashboard.html
+    return render(request, 'caregenius/dashboard_ordonnances.html')
+
+def dashboard_radiographies(request):
+    # rend le template dashboard.html
+    return render(request, 'caregenius/dashboard_radiographies.html')
+
 
 def register(request):
     # rend le template register.html
