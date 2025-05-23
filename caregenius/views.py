@@ -85,6 +85,32 @@ def landing(request):
     # rend le template landing.html
     return render(request, 'caregenius/landing.html')
 
+def dashboard_medicaments(request):
+    # Vérifie si l'utilisateur est connecté
+    if 'user_id' not in request.session:
+        return redirect('caregenius:connection')
+    # rend le template dashboard.html
+    return render(request, 'caregenius/dashboard_medicaments.html')
+
+def dashboard_ordonnances(request):
+    # Vérifie si l'utilisateur est connecté
+    if 'user_id' not in request.session:
+        return redirect('caregenius:connection')
+    # rend le template dashboard.html
+    return render(request, 'caregenius/dashboard_ordonnances.html')
+
+def dashboard_radiographies(request):
+    # Vérifie si l'utilisateur est connecté
+    if 'user_id' not in request.session:
+        return redirect('caregenius:connection')
+    # rend le template dashboard.html
+    return render(request, 'caregenius/dashboard_radiographies.html')
+
+
+def register(request):
+    # rend le template register.html
+    return render(request, 'caregenius/register.html')
+
 #analyse l'image et renvoie le résultat
 def analyse_image(request):
     # Vérifie si l'utilisateur est connecté
@@ -94,8 +120,8 @@ def analyse_image(request):
     user_id = request.session['user_id']
     user = User.objects.get(id=user_id)
 
-    if request.method == 'POST' and request.FILES.get('photo'):
-        image_file = request.FILES.get('photo')
+    if request.method == 'POST' and request.FILES.get('image'):
+        image_file = request.FILES.get('image')
         print("Image reçue :", image_file.name)
         resultat = analyser_image(
             image_file,
@@ -107,7 +133,7 @@ def analyse_image(request):
             user.is_pregnant
         )
         # Récupérer le texte extrait et le résultat de l'analyse et l'envoyer au template
-        return render(request, 'caregenius/analyser_image.html', {
+        return render(request, 'caregenius/dashboard_medicaments.html', {
             'result': resultat
         })
 

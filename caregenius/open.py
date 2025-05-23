@@ -42,7 +42,7 @@ Sachant que le patient est une {sexe} de {age} ans de taille {taille} cm, pesant
 - Résume les informations importantes.
 - Mentionne les contre-indications potentielles ou précautions.
 - Donne un avis général utile.
-Si le contenu n'est pas médical ou semble sans rapport, réponds simplement : "Veuillez prendre une autre photo." Suivie du contenu de l'ordonnance ou de la notice.
+Si le contenu n'est pas médical ou semble sans rapport, réponds simplement : "Veuillez prendre une autre photo.".
 """
 
     try:

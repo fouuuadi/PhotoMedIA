@@ -18,8 +18,9 @@ body {
     /* centre vertical */
     justify-content: space-around;
     /* centre horizontal */
-    min-height: 100vh;
     padding: 16px;
+    height: 100vh;
+    gap: 100px;
 }
 
 /* 4) Carte blanche du formulaire */
