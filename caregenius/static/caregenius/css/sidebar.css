@@ -135,9 +135,10 @@ color: black;
     width: 100%;
 }
 
-.sidebar li a:hover{
-    background: #e4e4e4;
+.sidebar li a:hover {
+    background: #00C47A;
 }
+
 .sidebar li a .icon,
 .sidebar li a .text{
     transition: var(--trans-02);
@@ -221,9 +222,10 @@ body.dark .switch::before{
 
 /* Fond et couleur du lien actif */
 .sidebar .menu-links li.active > a {
-    background-color: #51F9B8 !important;
+    background-color: #00C47A !important;
     color: #00796b !important;
 }
+
 /* Icône et texte */
 .sidebar .menu-links li.active > a .icon,
 .sidebar .menu-links li.active > a .text {
