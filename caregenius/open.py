@@ -37,12 +37,12 @@ Voici le texte extrait d'une ordonnance ou d'une notice de médicament :
 
 {texte_extrait}
 
-Sachant que le patient est une {sexe} de {age} ans de taille {taille} cm, pesant {poids} kg avec les pathologies suivantes : {pathologies} et est {'enceinte' if grossesse else 'non enceinte'}.
+Sachant que le patient est une {sexe} de {age} ans de taille {taille} cm, pesant {poids} kg avec les pathologies suivantes : {pathologies} et est {'enceinte' if grossesse else 'non enceinte'} et qu 'il peut avoir des erreurs dans le texte extrait mais que tu dois te concentrer sur les informations médicales pertinentes.
 
 - Résume les informations importantes.
 - Mentionne les contre-indications potentielles ou précautions.
 - Donne un avis général utile.
-Si le contenu n'est pas médical ou semble sans rapport, réponds simplement : "Veuillez prendre une autre photo.".
+Si le contenu n'est pas médical ou semble sans rapport, réponds simplement : "Veuillez prendre une autre photo.". suivi de pourquoi il faut prendre une autre photo. est ce une erreur de l'utilisateur ou une erreur de l'api.
 """
 
     try:

@@ -14,6 +14,7 @@ urlpatterns = [
     path("dashboard_radiographies/", views.dashboard_radiographies, name="dashboard_radiographies"),
     path("register/", views.register, name="register"),
     path("register/", views.register, name="register"),
-    path('analyse_image/', views.analyse_image, name='analyse_image'),
-    path("landing/", landing, name="landing")
+    # path('analyse_image/', views.analyse_image, name='analyse_image'),
+    path("landing/", landing, name="landing"),
+    path('analyse_image_api/', views.analyse_image_api, name='analyse_image_api'),
 ]

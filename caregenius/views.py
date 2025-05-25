@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib import messages
 from .models import User
@@ -107,22 +108,45 @@ def dashboard_radiographies(request):
     return render(request, 'caregenius/dashboard_radiographies.html')
 
 
-def register(request):
-    # rend le template register.html
-    return render(request, 'caregenius/register.html')
+# def register(request):
+#     # rend le template register.html
+#     return render(request, 'caregenius/register.html')
 
 #analyse l'image et renvoie le résultat
-def analyse_image(request):
-    # Vérifie si l'utilisateur est connecté
-    if 'user_id' not in request.session:
-        return redirect('caregenius:connection')
+# def analyse_image(request):
+#     # Vérifie si l'utilisateur est connecté
+#     if 'user_id' not in request.session:
+#         return redirect('caregenius:connection')
 
-    user_id = request.session['user_id']
-    user = User.objects.get(id=user_id)
+#     user_id = request.session['user_id']
+#     user = User.objects.get(id=user_id)
 
+#     if request.method == 'POST' and request.FILES.get('image'):
+#         image_file = request.FILES.get('image')
+#         print("Image reçue :", image_file.name)
+#         resultat = analyser_image(
+#             image_file,
+#             user.gender,
+#             user.age,
+#             user.weight,
+#             user.height,
+#             user.pathology,
+#             user.is_pregnant
+#         )
+#         # Récupérer le texte extrait et le résultat de l'analyse et l'envoyer au template
+#         return render(request, 'caregenius/dashboard_medicaments.html', {
+#             'result': resultat
+#         })
+
+def analyse_image_api(request):
     if request.method == 'POST' and request.FILES.get('image'):
+        # Récupère l'utilisateur comme dans ta fonction existante
+        user_id = request.session.get('user_id')
+        if not user_id:
+            return JsonResponse({'error': 'Non authentifié'}, status=401)
+        user = User.objects.get(id=user_id)
+
         image_file = request.FILES.get('image')
-        print("Image reçue :", image_file.name)
         resultat = analyser_image(
             image_file,
             user.gender,
@@ -132,12 +156,8 @@ def analyse_image(request):
             user.pathology,
             user.is_pregnant
         )
-        # Récupérer le texte extrait et le résultat de l'analyse et l'envoyer au template
-        return render(request, 'caregenius/dashboard_medicaments.html', {
-            'result': resultat
-        })
-
-
+        return JsonResponse({'result': resultat})
+    return JsonResponse({'error': 'Requête invalide'}, status=400)
 
 #envoi des informations de l'utilisateur à la page dashboard
 def profil(request):

@@ -2,61 +2,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'caregenius/css/variables.css' %}">
-    <link rel="stylesheet" href="{% static 'caregenius/css/dashboard_medicaments.css' %}">
-    <link rel="stylesheet" href="{% static 'caregenius/css/sidebar.css' %}">
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
-    <title>dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'caregenius/css/variables.css' %}">
+  <link rel="stylesheet" href="{% static 'caregenius/css/dashboard_medicaments.css' %}">
+  <link rel="stylesheet" href="{% static 'caregenius/css/sidebar.css' %}">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+  <title>dashboard</title>
 </head>
-<body>
+<body> 
+    <div id="page-overlay" class="none"></div>
     {% include "caregenius/include/sidebar.html" %}
-<section class="home">
+  <section class="home">
     <div class="header_medicaments">Médicaments</div>
-    <div class="card_medicaments none">
-        <div class="card_medicaments_header">
-            <h2>Résultats</h2>
-        </div>
-        <div class="card_medicaments_body">
-            <h2>text du resultat du call de l'api qui traite les photos </h2>
-        </div> 
-    </div>   
-        <div class="upload-container">
-            <form id="uploadForm" enctype="multipart/form-data" action="{% url 'caregenius:analyse_image' %}" method="POST">
-                {% csrf_token %}
-                <input type="file" id="fileInput" name="image" accept="image/*" hidden>
-                <div id="dropArea" class="drop-area">
-                    <i class='bx bx-image icon-upload'></i>
-                    <p>Glissez-déposez une image ou cliquez pour parcourir</p>
-                    <button type="button" id="browseBtn">Choisir un fichier</button>
-                </div>
-                <div id="preview"></div>
-                <button type="submit" id="submitBtn" class="btn_medicaments">
-                    Valider
-                </button>
-            </form>
 
+    <!-- 1. Écran d’upload -->
+    <div id="upload-screen">
+      <div class="upload-container">
+        <form id="uploadForm"
+              enctype="multipart/form-data"
+              action="{% url 'caregenius:analyse_image_api' %}"
+              method="POST">
+          {% csrf_token %}
+          <input type="file"
+                 id="fileInput"
+                 name="image"
+                 accept="image/*"
+                 hidden>
+          <div id="dropArea" class="drop-area">
+            <i class='bx bx-image icon-upload'></i>
+            <p>Glissez-déposez une image ou cliquez pour parcourir</p>
+            <button type="button" id="browseBtn">Choisir un fichier</button>
+          </div>
+          <div id="preview"></div>
+          <button type="submit" id="submitBtn" class="btn_medicaments">
+            Valider
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 2. Écran de loading -->
+    <div id="loading-screen" class="none" style="text-align:center; padding:2em;">
+        <div id="lottie-loading"
+            class="lottie-loading"
+             data-lottie-url="{% static 'caregenius/json/Animation.json' %}">
         </div>
-        {% block content %}
-            <h2>Résultat de l'analyse</h2>
-            <div class="resultat-box">
-            <pre>{{ result }}</pre>
-            </div>
-        {% endblock %}
+    </div>
+
+    <!-- 3. Écran du résultat -->
+    <div id="result-screen" class="none" style="padding:2em;">
+        <h2>Résultat de l'analyse</h2>
+        <!-- on ajoute la classe result-text ici -->
+        <div id="resultat" class="result-text"><!-- injecté par JS --></div>
+    </div>
     
+    <!-- 4. Bouton “Nouvelle analyse” -->
+    <div style="text-align:center; margin-top:1em;">
+        <!-- plus besoin du style inline, on va centrer via le CSS -->
+        <button id="resetBtn" class="btn_medicaments none">
+        Nouvelle analyse
+        </button>
+    </div>
+  
 
-        </div>
-        <div id="resultat" class="none">
-            Hellooooooo le resultat
-        </div>
-        <div id="lottie-loading" data-lottie-url="{% static 'json/Animation.json' %}" style="width:120px; margin:auto;"></div>
+  </section>
 
-</section>
+  <script src="{% static 'caregenius/js/dashboard_medicaments.js' %}"></script>
+  <script src="{% static 'caregenius/js/sidebar.js' %}"></script>
 </body>
-<script src="{% static 'caregenius/js/dashboard_medicaments.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
-<script src="{% static 'caregenius/js/sidebar.js' %}"></script>
-<!-- <script src="{% static 'caregenius/js/script.js' %}"></script> -->
 </html>
