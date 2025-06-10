@@ -177,5 +177,34 @@ def profil(request):
         'gender': user.gender
     }
     # Rendre le template dashboard.html avec les informations de l'utilisateur  
-    return render(request, 'caregenius/dashboard.html', context)
+    return render(request, 'caregenius/profil.html', context)
 
+def profil_update(request):
+    # Vérifie si l'utilisateur est connecté
+    if 'user_id' not in request.session:
+        return redirect('caregenius:connection')
+
+    user_id = request.session['user_id']
+    user = User.objects.get(id=user_id)
+
+    if request.method == 'POST':
+        # Met à jour les informations de l'utilisateur
+        user.pseudo = request.POST.get('pseudo')
+        user.height = request.POST.get('height')
+        user.weight = request.POST.get('weight')
+        user.pathology = request.POST.get('pathology')
+        user.gender = request.POST.get('gender')
+        user.save()
+
+        messages.success(request, 'Vos informations ont été mises à jour avec succès !')
+
+    # Récupère les informations de l'utilisateur
+    context = {
+        'pseudo': user.pseudo,
+        'height': user.height,
+        'weight': user.weight,
+        'pathology': user.pathology,
+        'gender': user.gender
+    }
+    # Rendre le template dashboard.html avec les informations de l'utilisateur  
+    return render(request, 'caregenius/profil.html', context)
