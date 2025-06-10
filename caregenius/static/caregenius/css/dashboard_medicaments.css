@@ -209,3 +209,95 @@
   }
   
   
+
+
+
+/* Titres principaux */
+.section-title {
+    font-size: 1.8em;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+}
+
+/* Sous-sections */
+.subsection-title {
+    font-size: 1.4em;
+    color: #34495e;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Listes */
+ul, ol {
+    margin: 10px 0 20px 20px;
+    padding: 0;
+}
+
+.patient-info li,
+.analysis-list li,
+.error-list li {
+    margin-bottom: 8px;
+}
+
+/* Données patient */
+.patient-data {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.patient-info li {
+    font-size: 1em;
+    color: #2c3e50;
+}
+
+/* Instructions d'analyse */
+.analysis-instructions {
+    background-color: #dff9fb;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.analysis-structure {
+    background-color: #f6e58d;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Gestion des erreurs */
+.error-handling {
+    background-color: #ffcccc;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.error-list li {
+    color: #c0392b;
+}
+
+/* Notes */
+.note, .final-note {
+    font-style: italic;
+    color: #7f8c8d;
+    margin-top: 20px;
+}
+
+/* Liens */
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

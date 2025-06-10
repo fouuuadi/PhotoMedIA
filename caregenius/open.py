@@ -37,13 +37,48 @@ Voici le texte extrait d'une ordonnance ou d'une notice de médicament :
 
 {texte_extrait}
 
-Sachant que le patient est une {sexe} de {age} ans de taille {taille} cm, pesant {poids} kg avec les pathologies suivantes : {pathologies} et est {'enceinte' if grossesse else 'non enceinte'} et qu 'il peut avoir des erreurs dans le texte extrait mais que tu dois te concentrer sur les informations médicales pertinentes.
+<div class="patient-data">
+    <h2 class="section-title">👤 Données patient</h2>
+    <ul class="patient-info">
+        <li><strong>Sexe :</strong> {sexe}</li>
+        <li><strong>Âge :</strong> {age} ans</li>
+        <li><strong>Taille :</strong> {taille} cm</li>
+        <li><strong>Poids :</strong> {poids} kg</li>
+        <li><strong>Pathologies connues :</strong> {pathologies}</li>
+        <li><strong>Enceinte :</strong> {"Oui" if grossesse else "Non"}</li>
+    </ul>
+</div>
 
-- Résume les informations importantes.
-- Mentionne les contre-indications potentielles ou précautions.
-- Donne un avis général utile.
-Si le contenu n'est pas médical ou semble sans rapport, réponds simplement : "Veuillez prendre une autre photo.". suivi de pourquoi il faut prendre une autre photo. est ce une erreur de l'utilisateur ou une erreur de l'api.
+<div class="analysis-instructions">
+    <h2 class="section-title">🔎 Ta mission</h2>
+    <p>En tant qu’assistant médical, analyse le texte ci-dessus et produis un compte-rendu clair, structuré et pertinent en HTML. Le compte-rendu doit être utile pour un professionnel de santé ou un patient cherchant à comprendre les informations médicales contenues dans le texte. Le texte peut contenir des erreurs d'OCR, mais concentre-toi sur les informations médicales pertinentes.</p>
+</div>
+
+<div class="analysis-structure">
+    <h3 class="subsection-title">Voici les éléments à inclure dans le rendu HTML :</h3>
+    <ol class="analysis-list">
+        <li>Une section avec les <strong>molécules ou médicaments identifiés</strong> (nom et classe si possible).</li>
+        <li>Une section pour la <strong>posologie recommandée</strong> (si identifiable).</li>
+        <li>Une section pour les <strong>indications possibles</strong> (raisons pour lesquelles ce traitement peut être prescrit).</li>
+        <li>Une section pour les <strong>contre-indications ou précautions</strong> selon les données patient.</li>
+        <li>Une section pour les <strong>effets secondaires courants</strong>.</li>
+        <li>Une section pour un <strong>avis global ou des recommandations</strong>.</li>
+    </ol>
+</div>
+
+<div class="error-handling">
+    <h3 class="subsection-title">Si le texte ne semble pas médical ou est trop brouillon :</h3>
+    <ul class="error-list">
+        <li>Répond avec un message HTML clair indiquant : "Veuillez prendre une autre photo."</li>
+        <li>Explique clairement si l’erreur vient de la photo ou de l’analyse OCR/API.</li>
+    </ul>
+</div>
+
+<p class="note">Structure le HTML avec des balises comme <code>&lt;h2&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;li&gt;</code>, etc., pour que le rendu soit clair et bien organisé. Ajoute des classes CSS aux balises pour permettre un stylage ultérieur (par exemple, <code>class="section-title"</code> pour les titres).</p>
+
+<p class="final-note">Sois clair, précis et amical.</p>
 """
+
 
     try:
         response = client.chat.completions.create(

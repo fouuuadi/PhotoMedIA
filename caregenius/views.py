@@ -208,3 +208,14 @@ def profil_update(request):
     }
     # Rendre le template dashboard.html avec les informations de l'utilisateur  
     return render(request, 'caregenius/profil.html', context)
+
+def logout(request):
+    # Supprime l'identifiant de l'utilisateur de la session
+    if 'user_id' in request.session:
+        del request.session['user_id']
+        messages.success(request, 'Déconnexion réussie !')
+    else:
+        messages.error(request, 'Vous n\'êtes pas connecté.')
+
+    # Redirige vers la page de connexion
+    return redirect('caregenius:connection')

@@ -19,5 +19,6 @@ urlpatterns = [
     path('analyse_image_api/', views.analyse_image_api, name='analyse_image_api'),
     path('profil/', views.profil, name='profil'),
     path('profil_update/', views.profil_update, name='profil_update'),
+    path('logout/', views.logout, name='logout'),
 
 ]
