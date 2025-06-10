@@ -29,6 +29,13 @@
       <form method="POST" action="{% url 'caregenius:connection' %}">
         {% csrf_token %}
         <div class="form-footer">
+          {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
           <div class="form-group">
             <input
               type="text"

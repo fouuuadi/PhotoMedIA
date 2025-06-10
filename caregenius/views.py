@@ -27,7 +27,7 @@ def connection(request):
                 request.session['user_id'] = user.id
 
                 messages.success(request, 'Connexion réussie !')
-                return redirect('caregenius:landing')# proprement vers la page d'accueil
+                return redirect('caregenius:dashboard_medicaments')# proprement vers la page d'accueil
             else:
                 messages.error(request, 'Mot de passe incorrect.')
         except User.DoesNotExist:
