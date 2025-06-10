@@ -5,7 +5,7 @@ try:
         dbname="postgres",
         user="postgres",
         password="wheres3modestin",
-        host="db.qspoobpdyzacfhedlisn.supabase.co",
+        host="aws-0-eu-west-3.pooler.supabase.com",
         port="5432",
         sslmode="require"
     )
