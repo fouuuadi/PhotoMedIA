@@ -51,6 +51,7 @@
     text-decoration: none;
     font-weight: 500;
   }
+  
   .auth a {
     margin-left: 1rem;
     text-decoration: none;
@@ -68,3 +69,12 @@
   .text-color-primary{
     color: var(--color-primary);
   }
+
+  
+  @media only screen and (max-width : 768px) {
+    .auth{
+      width: 50%;
+      display: flex;
+      justify-content: space-around;
+    }
+}
