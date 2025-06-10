@@ -25,7 +25,8 @@ jobs:
           --health-retries 5
 
     env:
-      SUPABASE_DATABASE_URL: postgresql://postgres.qspoobpdyzacfhedlisn:wheres3modestin@aws-0-eu-west-3.pooler.supabase.com:5432/postgres?sslmode=require
+      SUPABASE_DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     steps:
       - uses: actions/checkout@v3
