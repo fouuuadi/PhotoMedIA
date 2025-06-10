@@ -10,7 +10,6 @@
   #all-link-header{
     display: flex;
     align-items: center;
-    width: 70%;
   }
 
   #logo{
@@ -33,10 +32,10 @@
     background: #fff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   }
-  .site-header .container-header {
+  .container-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content:space-between;
     height: 64px;
   }
   .logo-text {
@@ -59,11 +58,12 @@
   }
   .btn-login {
     color: #444;
+    padding: 0.5rem 1rem;
   }
   .btn-signup {
     background: var(--color-secondary);
     color: #fff;
-    padding: 0.5rem 1rem;
+    padding: 8px 16px;
     border-radius: 4px;
   }
   .text-color-primary{
@@ -72,9 +72,15 @@
 
   
   @media only screen and (max-width : 768px) {
+    #logo-div a span {
+        display: none;
+    }
+    #logo-div a span {
+        width: 20%;
+    }
     .auth{
-      width: 50%;
+      width: 100%;
       display: flex;
-      justify-content: space-around;
+      justify-content: flex-end;
     }
 }

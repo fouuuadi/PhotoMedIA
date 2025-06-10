@@ -97,6 +97,15 @@
   .text-color-primary{
     color: var(--color-primary);
   }
+  .pp-container{
+    background-color: rgb(255, 250, 243);
+    margin-top: 30px;
+    padding: 1rem;
+    border-radius: 15px;
+  }
+  #portrait-paysage{
+    width: 40%;
+  }
   /* Responsive */
   @media(max-width: 900px) {
     .hero {
