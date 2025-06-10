@@ -16,9 +16,12 @@ import dj_database_url
 from pathlib import Path
 import sys
 
+
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(BASE_DIR / '.env')
+load_dotenv(BASE_DIR / '.env.local', override=True)
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,26 +31,30 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = 'django-insecure-19c75#8zc60rsu*4*+rj&ca0(fmq_a(yyf3z%)exavd&$bg+7w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = os.getenv('DJANGO_DEBUG') == 'True'
+DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = [
-    
-]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-# Database Supabase
-DATABASES = {
-    'default': dj_database_url.parse(
-        os.environ.get('SUPABASE_DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True
-    )
-}
-if 'test' in os.sys.argv:
+# Database configuration
+# Utilise SQLite en local si USE_LOCAL_DB est True ou si SUPABASE_DATABASE_URL n'est pas définie
+USE_LOCAL_DB = os.getenv('USE_LOCAL_DB', 'True') == 'True'
+DATABASE_URL = os.environ.get('SUPABASE_DATABASE_URL')
+
+if DATABASE_URL and not USE_LOCAL_DB:
+    # Configuration Supabase pour la production
+    DATABASES = {
+        'default': dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
+else:
+    # Configuration SQLite pour le développement local
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': ':memory:',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
@@ -94,17 +101,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'photomedia.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 
 # Password validation

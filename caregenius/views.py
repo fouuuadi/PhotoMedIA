@@ -88,8 +88,8 @@ def landing(request):
 
 def dashboard_medicaments(request):
     # Vérifie si l'utilisateur est connecté
-    if 'user_id' not in request.session:
-        return redirect('caregenius:connection')
+    # if 'user_id' not in request.session:
+    #     return redirect('caregenius:connection')
     # rend le template dashboard.html
     return render(request, 'caregenius/dashboard_medicaments.html')
 
