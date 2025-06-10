@@ -14,6 +14,7 @@ import os
 from dotenv import load_dotenv
 import dj_database_url
 from pathlib import Path
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,16 +31,25 @@ SECRET_KEY = 'django-insecure-19c75#8zc60rsu*4*+rj&ca0(fmq_a(yyf3z%)exavd&$bg+7w
 # DEBUG = True
 DEBUG = os.getenv('DJANGO_DEBUG') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    
+]
 
 # Database Supabase
 DATABASES = {
     'default': dj_database_url.parse(
-        os.getenv('SUPABASE_DATABASE_URL'),
+        os.environ.get('SUPABASE_DATABASE_URL'),
         conn_max_age=600,
         ssl_require=True
     )
 }
+if 'test' in os.sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
+    }
 
 # Application definition
 
