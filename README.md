@@ -58,6 +58,8 @@ photomedia/
 ├── Dockerfile
 ├── docker-compose.yml
 └── requirements.txt
+└── deploiementDocker/
+
 ```
 
 ---
@@ -94,6 +96,13 @@ docker compose run web python manage.py test
 Disponible ici :
 [https://hub.docker.com/r/modestin/caregenius](https://hub.docker.com/r/modestin/caregenius)
 
+
+```bash
+cd deploiementDocker
+```
+```bash
+docker compose up --build
+```
 ---
 
 ## 🧩 Technologies utilisées
