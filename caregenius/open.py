@@ -70,7 +70,7 @@ Voici le texte extrait d'une ordonnance ou d'une notice de médicament :
     <h3 class="subsection-title">Si le texte ne semble pas médical ou est trop brouillon :</h3>
     <ul class="error-list">
         <li>Répond avec un message HTML clair indiquant : "Veuillez prendre une autre photo."</li>
-        <li>Explique clairement si l’erreur vient de la photo ou de l’analyse OCR/API.</li>
+        <li>Explique clairement si l’erreur vient de la photo.</li>
     </ul>
 </div>
 
