@@ -35,7 +35,8 @@ cd photomedia
 DJANGO_SECRET_KEY=changeme
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
-DATABASE_URL=postgres://USER:PASSWORD@HOST:PORT/DBNAME
+SUPABASE_DATABASE_URL=postgres://USER:PASSWORD@HOST:PORT/DBNAME
+OPENAI_API_KEY=sk.........
 ```
 
 ### 4. Démarrer le projet
