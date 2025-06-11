@@ -118,11 +118,11 @@ docker compose up --build
 
 ## 👤 Auteurs
 
-Projet conçu et maintenu par **\[
-  Lissanou Modestin HOUNGA
-  LAMNAOUAR Fouad
-  ABBES Amine
-]\**.
+Projet conçu et maintenu par :
+
+- Linkedin [Lissanou Modestin HOUNGA](https://www.linkedin.com/in/modestin/)
+- Linkedin [LAMNAOUAR Fouad](https://www.linkedin.com/in/fouad-lamnaouar-196019234/)
+- Github [ABBES Amine](https://github.com/ABBESAmine)
 
 ---
 
